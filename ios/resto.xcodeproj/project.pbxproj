@@ -194,7 +194,6 @@
 				9CF0BF46B40C6F2C3B45E28F /* Pods-restoTests.debug.xcconfig */,
 				DAD441D81A9C9097433CC239 /* Pods-restoTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -308,6 +307,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);

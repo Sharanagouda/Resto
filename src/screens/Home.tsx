@@ -1,88 +1,82 @@
-// components/Hello.tsx
+//This is an example code to get Geolocation//  
 import React from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+//import react in our code. 
+import {View, Text,  StyleSheet, Image ,PermissionsAndroid,Platform} from 'react-native';
+//import all the components we are going to use.
+import Geolocation from '@react-native-community/geolocation';
+//https://medium.com/better-programming/how-to-use-geolocation-in-react-native-hooks-aea06bf58263
 
-export interface Props {
-  name: string;
-  enthusiasmLevel?: number;
-}
 
-interface State {
-  enthusiasmLevel: number;
-}
-
-export default class Hello extends React.Component<Props, State> {
-  constructor(props: Props) {
+export default class Hello extends React.Component {
+  constructor(props) {
     super(props);
-
-    // if ((this.state.enthusiasmLevel || 0) <= 0) {
-    //   throw new Error('You could be a little more enthusiastic. :D');
-    // }
-
     this.state = {
-      enthusiasmLevel: props.enthusiasmLevel || 1,
-    };
+        currentLongitude: 'unknown',//Initial Longitude
+        currentLatitude: 'unknown',//Initial Latitude
+     }
   }
-
-  onIncrement = () =>
-    this.setState({enthusiasmLevel: this.state.enthusiasmLevel + 1});
-  onDecrement = () =>
-    this.setState({enthusiasmLevel: this.state.enthusiasmLevel - 1});
-  getExclamationMarks = (numChars: number) => Array(numChars + 1).join('!');
+   componentDidMount() {
+  //Checking for the permission just after component loaded
+  this.callLocation();  
+}
+callLocation(){
+    Geolocation.getCurrentPosition(
+       (position) => {
+          const currentLongitude = JSON.stringify(position.coords.longitude);
+          const currentLatitude = JSON.stringify(position.coords.latitude);
+          this.setState({ 
+              currentLongitude:currentLongitude,
+              currentLatitude:currentLatitude
+         });
+       },
+       (error) => alert(error.message),
+       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+    Geolocation.watchPosition((position) => {
+        console.log(position);
+        const currentLongitude = JSON.stringify(position.coords.longitude);
+        const currentLatitude = JSON.stringify(position.coords.latitude);
+       this.setState({ 
+            currentLongitude:currentLongitude,
+            currentLatitude:currentLatitude
+           });
+    });
+}
 
   render() {
     return (
-      <View style={styles.root}>
-        <Text style={styles.greeting}>
-          Hello{' '}
-          {this.props.name +
-            this.getExclamationMarks(this.state.enthusiasmLevel)}
-        </Text>
-
-        <View style={styles.buttons}>
-          <View style={styles.button}>
-            <Button
-              title="-"
-              onPress={this.onDecrement}
-              accessibilityLabel="decrement"
-              color="red"
-            />
-          </View>
-
-          <View style={styles.button}>
-            <Button
-              title="+"
-              onPress={this.onIncrement}
-              accessibilityLabel="increment"
-              color="blue"
-            />
-          </View>
-        </View>
-      </View>
+     
+        <View style = {styles.container}>
+          <Image
+            source={{uri:'https://png.icons8.com/dusk/100/000000/compass.png'}}
+            style={{width: 100, height: 100}}
+          />
+          <Text style = {styles.boldText}>
+             You are Here
+          </Text>
+          <Text style={{justifyContent:'center',alignItems: 'center',marginTop:16}}>
+            Longitude: {this.state.currentLongitude}
+          </Text>
+          <Text style={{justifyContent:'center',alignItems: 'center',marginTop:16}}>
+            Latitude: {this.state.currentLatitude}
+          </Text>
+       </View>
+     
     );
   }
 }
 
 // styles
 const styles = StyleSheet.create({
-  root: {
-      flex:1,
-    alignItems: 'center',
-    justifyContent:"center"
-  },
-  buttons: {
-    flexDirection: 'row',
-    minHeight: 70,
-    alignItems: 'stretch',
-    alignSelf: 'center',
-    borderWidth: 5,
-  },
-  button: {
+ container: {
     flex: 1,
-    paddingVertical: 0,
-  },
-  greeting: {
-    color: '#999',
-    fontWeight: 'bold',
-  },
+    alignItems: 'center',
+    justifyContent:'center',
+    padding:16,
+    backgroundColor:'white'
+ },
+ boldText: {
+    fontSize: 30,
+    color: 'red',
+ }
 });
