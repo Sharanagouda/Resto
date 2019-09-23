@@ -13,6 +13,7 @@
     "@types/react-native": "^0.60.15",
     "react": "16.8.6",
     "react-native": "0.60.5",
+    "react-native-maps": "^0.25.0",
     "react-native-router-flux": "^4.0.6",
     "react-native-typescript-transformer": "^1.2.13",
     "react-redux": "^7.1.1",
