@@ -2,7 +2,9 @@ import React, {Component} from "react";
 import {Router, Scene} from "react-native-router-flux";
 import Home from "../screens/Home";
 import Gmap from "../screens/Gmap";
+import GeolocationExample from "../screens/Geolocation";
 
+import Craigslist from "../screens/FlatScreen"
 class Routes extends Component {
 
 
@@ -11,10 +13,10 @@ class Routes extends Component {
       return (
         <Router>
           <Scene key="user">
-          
-          <Scene key="gmap"initial={true} component={Gmap} title="Google Map" />
-            <Scene key="home" component={Home} title="Home" />
-          
+          <Scene key="flatlist"   component={Craigslist} title="Flat list" />
+          <Scene key="gmap" initial={true}   hideNavBar={true} component={Gmap} title="Google Map" />
+            <Scene key="home"   component={Home} title="Home" />
+            <Scene key="Geo" component={GeolocationExample} title="Geo Exp" />
           </Scene>
         </Router>
       );
