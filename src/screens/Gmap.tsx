@@ -144,8 +144,8 @@ callLocation(){
                     </MapView>
                   }
                   </View>
-                  <View style={{ backgroundColor:'transparent'}}>
-                  <FlatList horizontal={true}
+                  <View style={{ }}>
+                  <FlatList
                       style={stylesheet.contentList}
                       columnWrapperStyle={stylesheet.listContainer}
                       data={this.state.data}
@@ -212,7 +212,7 @@ callLocation(){
       borderColor:'#efefef'
    },
    contentList:{
-   
+   height:100
   },
   cardContent: {
     marginLeft:20,

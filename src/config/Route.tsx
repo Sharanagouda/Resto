@@ -13,8 +13,8 @@ class Routes extends Component {
       return (
         <Router>
           <Scene key="user">
-          <Scene key="flatlist"   component={Craigslist} title="Flat list" />
-          <Scene key="gmap" initial={true}   hideNavBar={true} component={Gmap} title="Google Map" />
+          <Scene key="flatlist" initial={true}   component={Craigslist} title="Flat list" />
+          <Scene key="gmap"   hideNavBar={true} component={Gmap} title="Google Map" />
             <Scene key="home"   component={Home} title="Home" />
             <Scene key="Geo" component={GeolocationExample} title="Geo Exp" />
           </Scene>
